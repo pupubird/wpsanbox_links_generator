@@ -41,7 +41,7 @@ async function start(i, x) {
 }
 
 async function saveLinks(links, i) {
-  fs.writeFile(`links_${i}.txt`, links, function(err) {
+  fs.writeFileSync(`links_${i}.txt`, links, function(err) {
     if (err) {
       return console.log(err);
     }
@@ -49,9 +49,8 @@ async function saveLinks(links, i) {
 
   fs.readFile(`links_${i}.txt`, "utf8", (err, data) => {
     if (err) throw err;
-    data = data.replace(",", "\n");
-    console.log(data);
-    fs.writeFile(`links_${i}.txt`, data, function(err) {
+    data = data.split(",").join("\n");
+    fs.writeFileSync(`links_${i}.txt`, data, function(err) {
       if (err) {
         return console.log(err);
       }
